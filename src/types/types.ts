@@ -4,3 +4,8 @@ export enum Endpoints {
   REGISTER = '/register',
   REFRESH = '/refresh',
 }
+
+export enum Params {
+  EMPTHY = '',
+  FREEBOOKS = '?freeBooks=true',
+}

@@ -1,32 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useBookContext } from '../context/books/context';
 import BookItem from '../components/BookItem';
 import AddNewBook from '../components/AddNewBook';
+import { Params } from '../types/types';
 
 const Book = () => {
-  const {
-    books,
-    setBooks,
-    fetchAllBooks,
-    isAvailable,
-    toggleAvailable,
-    availableBooks,
-    getAvailableBooks,
-  } = useBookContext();
+  const { books, fetchAllBooks } = useBookContext();
+
+  const [params, setParams] = useState(Params.EMPTHY);
+  const [isAvailable, setIsAvailable] = useState(true);
+
+  const toggleAvailable = () => {
+    isAvailable ? setParams(Params.EMPTHY) : setParams(Params.FREEBOOKS);
+    setIsAvailable((prev) => !prev);
+  };
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    fetchAllBooks(isMounted, controller);
+    fetchAllBooks(isMounted, controller, params);
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, [setBooks]);
-
-  useEffect(() => {
-    getAvailableBooks();
-  }, [books]);
+  }, [books, params]);
 
   return (
     <section className="main-page">
@@ -44,13 +41,9 @@ const Book = () => {
       <div className="flex items-center flex-col w-full">
         {!isAvailable && <AddNewBook />}
         <div className="w-full">
-          {!isAvailable
-            ? books?.map((b) => {
-                return <BookItem key={b.id} {...b} />;
-              })
-            : availableBooks?.map((b) => {
-                return <BookItem key={b.id} {...b} />;
-              })}
+          {books?.map((book) => (
+            <BookItem book={book} isAvailable={isAvailable} />
+          ))}
         </div>
       </div>
     </section>

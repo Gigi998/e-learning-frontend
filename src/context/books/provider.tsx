@@ -11,12 +11,14 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
   const axiosToken = useAddAccToken(axiosBook);
   const navigate = useNavigate();
   const [books, setBooks] = useState<Books[]>([]);
-  const [availableBooks, setAvailableBooks] = useState<Books[]>([]);
-  const [isAvailable, setIsAvailable] = useState(false);
 
-  const fetchAllBooks = async (isMounted: boolean, controller: CustomAbortController) => {
+  const fetchAllBooks = async (
+    isMounted: boolean,
+    controller: CustomAbortController,
+    params?: string
+  ) => {
     try {
-      const result = await axiosToken.get('', {
+      const result = await axiosToken.get(`${params}`, {
         signal: controller.signal,
       });
       isMounted && setBooks(result.data);
@@ -42,7 +44,7 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
           id: id,
         },
       });
-      setAvailableBooks((prev) => prev?.filter((b) => b.id !== id));
+      setBooks((prev) => prev?.filter((b) => b.id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -59,19 +61,6 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const toggleAvailable = () => {
-    setIsAvailable((prev) => !prev);
-  };
-
-  const getAvailableBooks = async () => {
-    try {
-      const result = await axiosToken.get('?freeBooks=true');
-      setAvailableBooks(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <BookContext.Provider
       value={{
@@ -80,10 +69,6 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
         deleteBook,
         addNewBook,
         fetchAllBooks,
-        isAvailable,
-        toggleAvailable,
-        availableBooks,
-        getAvailableBooks,
       }}
     >
       {children}

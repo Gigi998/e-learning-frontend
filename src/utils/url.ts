@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const STUD_URL = 'http://localhost:3000/api/students';
+const BOOK_URL = 'http://localhost:3000/api/books';
+const BASE_URL = 'http://localhost:3000';
+
 export default axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -9,14 +13,14 @@ export default axios.create({
 });
 
 export const axiosStud = axios.create({
-  baseURL: process.env.STUD_URL,
+  baseURL: STUD_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 export const axiosBook = axios.create({
-  baseURL: process.env.BOOK_URL,
+  baseURL: BOOK_URL,
   headers: {
     'Content-Type': 'application/json',
   },
