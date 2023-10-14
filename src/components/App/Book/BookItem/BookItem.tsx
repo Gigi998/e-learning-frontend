@@ -1,8 +1,13 @@
-import { useBookContext } from '../context/books/context';
+import { useBookContext } from '../../../../context/books/context';
 import { useNavigate } from 'react-router-dom';
-import { Books } from '../types/booksTypes';
+import { Books } from '../../../../types/booksTypes';
 
-const BookItem = ({ book, isAvailable }: { book: Books; isAvailable: boolean }) => {
+export interface Props {
+  book: Books;
+  isAvailable: boolean;
+}
+
+const BookItem = ({ book, isAvailable }: Props) => {
   const { deleteBook } = useBookContext();
   const navigate = useNavigate();
   return (

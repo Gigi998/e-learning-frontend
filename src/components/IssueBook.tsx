@@ -1,6 +1,6 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Error from './Error';
+import Error from './Basic/Error/Error';
 import { useStudentContext } from '../context/students/context';
 
 const IssueBook = () => {

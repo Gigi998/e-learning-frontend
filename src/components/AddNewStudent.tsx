@@ -1,6 +1,7 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStudentContext } from '../context/students/context';
+import { InputField } from './Basic/InputField';
 
 const AddNewStudent = () => {
   const navigate = useNavigate();
@@ -42,28 +43,19 @@ const AddNewStudent = () => {
         </p>
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <label>
-          Name:
-          <br />
-          <input
-            type="text"
-            className="outline-none h-10 rounded-xl p-2 mt-1"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <label>
-          Email:
-          <br />
-          <input
-            type="email"
-            className="outline-none h-10 rounded-xl p-2 mt-1"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+        <InputField
+          label="Name: "
+          placeHolder="Email"
+          className="h-10 rounded-xl p-2 mt-1"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {/* <InputField
+          label="BookId: "
+          placeHolder="Email"
+          value={bookId}
+          onChange={(e) => setBookId(e.target.value)}
+        /> */}
         <label>
           BookId:
           <span className="ml-36 text-slate-600">*optional</span>

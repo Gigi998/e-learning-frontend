@@ -2,13 +2,13 @@ import { Routes, Route } from 'react-router-dom';
 import Book from './pages/Book';
 import Students from './pages/Students';
 import Layout from './components/Layout';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import AuthCheck from './components/AuthCheck';
 import AddNewStudent from './components/AddNewStudent';
 import IssueBook from './components/IssueBook';
 import SingleStudent from './components/SingleStudent';
-import ErrorPage from './components/ErrorPage';
+import ErrorPage from './pages/Error';
 
 function App() {
   return (

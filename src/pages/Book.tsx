@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useBookContext } from '../context/books/context';
-import BookItem from '../components/BookItem';
-import AddNewBook from '../components/AddNewBook';
+import BookItem from '../components/App/Book/BookItem/BookItem';
+import AddBookForm from '../components/App/Book/AddBookForm/AddBookForm';
 import { Params } from '../types/types';
 
 const Book = () => {
@@ -39,7 +39,7 @@ const Book = () => {
         </button>
       </div>
       <div className="flex items-center flex-col w-full">
-        {!isAvailable && <AddNewBook />}
+        {!isAvailable && <AddBookForm />}
         <div className="w-full">
           {books?.map((book) => (
             <BookItem book={book} isAvailable={isAvailable} />
