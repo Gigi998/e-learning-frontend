@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import UpdateStudForm from './UpdateStudForm';
-import { useStudentContext } from '../context/students/context';
-
+import UpdateStudentForm from '../UpdateStudentForm/UpdateStudentForm';
+import { useStudentContext } from '../../../../context/students/context';
 const SingleStudent = () => {
   const { singleStud, getSingleStudent, returnBook, isUpdate, setIsUpdate } = useStudentContext();
 
@@ -59,7 +58,7 @@ const SingleStudent = () => {
           </Link>
         </>
       ) : (
-        <UpdateStudForm name={singleStud?.name} email={singleStud?.email} id={id} />
+        <UpdateStudentForm name={singleStud?.name || ''} email={singleStud?.email || ''} id={id} />
       )}
     </div>
   );

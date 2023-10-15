@@ -5,10 +5,10 @@ import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AuthCheck from './components/AuthCheck';
-import AddNewStudent from './components/AddNewStudent';
-import IssueBook from './components/IssueBook';
-import SingleStudent from './components/SingleStudent';
+import AddNewStudent from './pages/AddNewStudent';
+import IssueBookForm from './components/App/Book/IssueBookForm/IssueBookForm';
 import ErrorPage from './pages/Error';
+import SingleStudent from './components/App/Students/SingleStudentCard/SingleStudentCard';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Book />} />
         </Route>
         <Route element={<AuthCheck />}>
-          <Route path="/issueBook" element={<IssueBook />} />
+          <Route path="/issueBook" element={<IssueBookForm />} />
         </Route>
         <Route element={<AuthCheck />}>
           <Route path="/students" element={<Students />}>

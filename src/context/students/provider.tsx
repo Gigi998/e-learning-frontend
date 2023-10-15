@@ -39,12 +39,11 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const addStudent = async ({ name, email, bookId }: AddStudent) => {
+  const addStudent = async ({ name, email }: AddStudent) => {
     try {
       await axiosToken.post('', {
         name: name,
         email: email,
-        studentBookId: bookId,
       });
       setSuccessMsg(`New student ${name} added!`);
     } catch (error) {
@@ -78,10 +77,8 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const studentIssueBook = async ({ studentId, bookId }: IssueBookType) => {
     try {
       await axiosToken.patch('', {
-        data: {
-          studentId,
-          bookId,
-        },
+        studentId,
+        bookId,
       });
       navigate('/students');
     } catch (error) {
@@ -115,7 +112,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
 
   const updateStudent = async ({ id, name, email }: UpdateStudentType) => {
     try {
-      const result = await axiosToken.patch(`/${id}/update`, {
+      const result = await axiosToken.patch(`/update/${id}`, {
         name: name,
         email: email,
       });

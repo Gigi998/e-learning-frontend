@@ -11,11 +11,11 @@ export interface Props {
 
 const FormWrapper = ({ errorMsg, children, formTitle, handleSubmit, className }: Props) => {
   return (
-    <section className={className}>
+    <div className={className}>
       {errorMsg && <Error errorMsg={errorMsg} />}
       {formTitle && <h2 className="text-3xl mx-auto">{formTitle}</h2>}
       <form onSubmit={handleSubmit}>{children}</form>
-    </section>
+    </div>
   );
 };
 

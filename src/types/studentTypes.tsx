@@ -14,7 +14,6 @@ export type StudentType = {
 export type AddStudent = {
   name: string;
   email: string;
-  bookId?: string;
 };
 
 export type IssueBookType = {
@@ -23,7 +22,7 @@ export type IssueBookType = {
 };
 
 export type UpdateStudentType = {
-  id: string | undefined;
-  name: string | undefined;
-  email: string | undefined;
+  id: string;
+  name: string;
+  email: string;
 };

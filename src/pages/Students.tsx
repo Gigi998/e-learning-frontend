@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import StudentItem from '../components/StudentItem';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useStudentContext } from '../context/students/context';
+import { StudentItem } from '../components/App/Students/StudentItem';
 
 const Students = () => {
   const { getAllStudents, students } = useStudentContext();

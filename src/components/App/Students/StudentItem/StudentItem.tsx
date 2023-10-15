@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useStudentContext } from '../context/students/context';
+import { useStudentContext } from '../../../../context/students/context';
 
-type StudentItemType = {
+export interface Props {
   name: string;
   id: string;
-};
+}
 
-const StudentItem = ({ name, id }: StudentItemType) => {
+const StudentItem = ({ name, id }: Props) => {
   const { deleteStudent } = useStudentContext();
 
   return (
