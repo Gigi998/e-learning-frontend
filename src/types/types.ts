@@ -9,3 +9,9 @@ export enum Params {
   EMPTHY = '',
   FREEBOOKS = '?freeBooks=true',
 }
+
+export enum Roles {
+  ADMIN = 'ADMIN',
+  TEACHER = 'TEACHER',
+  STUDENT = 'STUDENT',
+}
