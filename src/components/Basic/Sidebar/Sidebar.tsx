@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { links } from '../../../utils/sidebarLinks';
+import { links } from './constants';
 import { AiOutlineClose } from 'react-icons/ai';
 import useSidebar from '../../../hooks/useSidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';

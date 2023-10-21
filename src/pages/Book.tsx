@@ -7,7 +7,7 @@ import { Params } from '../types/types';
 const Book = () => {
   const { books, fetchAllBooks } = useBookContext();
 
-  const [params, setParams] = useState(Params.EMPTHY);
+  const [params, setParams] = useState(Params.FREEBOOKS);
   const [isAvailable, setIsAvailable] = useState(true);
 
   const toggleAvailable = () => {
