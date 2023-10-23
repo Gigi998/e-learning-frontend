@@ -1,23 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useStudentContext } from '../context/students/context';
 import { StudentItem } from '../components/App/Students/StudentItem';
+import { DEFAULT_BOOKS_TAKE } from '../types/types';
 
 const Students = () => {
   const { getAllStudents, students } = useStudentContext();
-
+  const [take, setTake] = useState(DEFAULT_BOOKS_TAKE);
   const location = useLocation();
   const loc = location.pathname;
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    getAllStudents(isMounted, controller);
+    getAllStudents(isMounted, controller, take);
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [setTake, take]);
 
   return (
     <>
@@ -31,6 +32,7 @@ const Students = () => {
               })}
             </div>
           </div>
+          <button onClick={() => setTake('2')}>See more</button>
         </section>
       ) : (
         <Outlet />

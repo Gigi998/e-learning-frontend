@@ -21,12 +21,23 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const [singleStud, setSingleStud] = useState<StudentType | undefined>(undefined);
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const getAllStudents = async (isMounted: boolean, controller: CustomAbortController) => {
+  const getAllStudents = async (
+    isMounted: boolean,
+    controller: CustomAbortController,
+    take: string
+  ) => {
     try {
       const response = await axiosToken.get('', {
         signal: controller.signal,
+        params: {
+          skip: students.length,
+          take: take,
+        },
       });
-      isMounted && setStudents(response.data);
+      isMounted &&
+        setStudents((prev) => {
+          return [...prev, ...response.data];
+        });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if ((error.name = 'CanceledError')) {

@@ -15,3 +15,5 @@ export enum Roles {
   TEACHER = 'TEACHER',
   STUDENT = 'STUDENT',
 }
+
+export const DEFAULT_BOOKS_TAKE = '6';
