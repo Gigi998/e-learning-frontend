@@ -24,14 +24,15 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const getAllStudents = async (
     isMounted: boolean,
     controller: CustomAbortController,
-    take: string
+    skip: number = 0,
+    take: number = 4
   ) => {
     try {
       const response = await axiosToken.get('', {
         signal: controller.signal,
         params: {
-          skip: students.length,
-          take: take,
+          skip,
+          take,
         },
       });
       isMounted &&

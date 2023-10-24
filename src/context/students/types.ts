@@ -12,7 +12,12 @@ export type StudentContext = {
   successMsg: string;
   singleStud: StudentType | undefined;
   isUpdate: boolean;
-  getAllStudents: (isMounted: boolean, controller: CustomAbortController, take: string) => void;
+  getAllStudents: (
+    isMounted: boolean,
+    controller: CustomAbortController,
+    skip: number,
+    take: number
+  ) => void;
   addStudent: ({ name, email }: AddStudent) => void;
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setSuccessMsg: React.Dispatch<React.SetStateAction<string>>;

@@ -2,28 +2,26 @@ import { useEffect, useState } from 'react';
 import { useBookContext } from '../context/books/context';
 import BookItem from '../components/App/Book/BookItem/BookItem';
 import AddBookForm from '../components/App/Book/AddBookForm/AddBookForm';
-import { Params } from '../types/types';
+import { DEFAULT_BOOKS_TAKE } from '../types/types';
 
 const Book = () => {
   const { books, fetchAllBooks } = useBookContext();
 
-  const [params, setParams] = useState(Params.FREEBOOKS);
   const [isAvailable, setIsAvailable] = useState(true);
 
   const toggleAvailable = () => {
-    isAvailable ? setParams(Params.EMPTHY) : setParams(Params.FREEBOOKS);
     setIsAvailable((prev) => !prev);
   };
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    fetchAllBooks(isMounted, controller, params);
+    fetchAllBooks(isMounted, controller, DEFAULT_BOOKS_TAKE, isAvailable ? 'true' : 'false');
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, [books, params]);
+  }, [isAvailable]);
 
   return (
     <section className="main-page">
