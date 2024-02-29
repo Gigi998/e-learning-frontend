@@ -25,7 +25,7 @@ const useAddAccToken = (axiosPrivate: AxiosInstance) => {
       // Interceptor error
       async (error) => {
         const prevRequest = error?.config;
-        if (error.response.status === 403 && !prevRequest._retry) {
+        if (error.response.status === 401 && !prevRequest._retry) {
           prevRequest._retry = true;
           const newAccToken = await handleRefresh();
           prevRequest.headers['Authorization'] = `Bearer ${newAccToken}`;

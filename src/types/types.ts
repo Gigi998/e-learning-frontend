@@ -5,11 +5,6 @@ export enum Endpoints {
   REFRESH = '/refresh',
 }
 
-export enum Params {
-  EMPTHY = '',
-  FREEBOOKS = '?freeBooks=true',
-}
-
 export enum Roles {
   ADMIN = 'ADMIN',
   TEACHER = 'TEACHER',

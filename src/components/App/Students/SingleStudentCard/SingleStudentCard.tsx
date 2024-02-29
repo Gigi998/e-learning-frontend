@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import UpdateStudentForm from '../UpdateStudentForm/UpdateStudentForm';
 import { useStudentContext } from '../../../../context/students/context';
+import { useBookContext } from '../../../../context/books/context';
+
 const SingleStudent = () => {
-  const { singleStud, getSingleStudent, returnBook, isUpdate, setIsUpdate } = useStudentContext();
+  const { singleStud, getSingleStudent, isUpdate, setIsUpdate } = useStudentContext();
+
+  const { returnBook } = useBookContext();
 
   const { id } = useParams<{ id?: string }>();
 
@@ -28,20 +32,23 @@ const SingleStudent = () => {
               {singleStud?.id}
             </h1>
             <div className="flex align-center justify-between flex-col">
-              <h1>
-                Issued book:{' '}
-                {singleStud?.studentBookId !== null
-                  ? singleStud?.studentBook?.title
-                  : 'No issued books'}
-              </h1>
-              {singleStud?.studentBookId !== null && (
-                <button
-                  className="bg-slate-300 hover:bg-slate-200 rounded-lg p-3 w-full text-xl"
-                  onClick={() => returnBook(id)}
-                >
-                  Return book
-                </button>
-              )}
+              <span className="flex flex-col gap-y-4">
+                <span>Issued books: </span>
+                <span className="flex flex-col gap-y-2">
+                  {singleStud?.books &&
+                    singleStud?.books.map((book) => (
+                      <span className=" bg-slate-300 rounded-lg p-3 flex ">
+                        {book.title}
+                        <button
+                          className="ml-auto block"
+                          onClick={() => returnBook(singleStud.id, book.id)}
+                        >
+                          RETURN
+                        </button>
+                      </span>
+                    ))}
+                </span>
+              </span>
             </div>
             <button
               className="bg-slate-300 hover:bg-slate-200 rounded-lg p-3  mx-auto text-xl w-full"

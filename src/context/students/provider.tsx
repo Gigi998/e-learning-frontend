@@ -1,14 +1,9 @@
 import { useState, ReactNode } from 'react';
 import useAddAccToken from '../../hooks/useAddAccToken';
 import axios from 'axios';
-import { axiosStud } from '../../utils/url';
+import { axiosStud, axiosBook } from '../../utils/url';
 import { useNavigate } from 'react-router-dom';
-import {
-  StudentType,
-  AddStudent,
-  IssueBookType,
-  UpdateStudentType,
-} from '../../types/studentTypes';
+import { StudentType, AddStudent, UpdateStudentType } from '../../types/studentTypes';
 import { StudentContext } from './context';
 import { CustomAbortController } from '../types';
 
@@ -74,49 +69,13 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const studentIssueBook = async ({ studentId, bookId }: IssueBookType) => {
-    try {
-      await axiosToken.patch('', {
-        studentId,
-        bookId,
-      });
-      navigate('/students');
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error?.response?.status === 403) {
-          setErrorMsg('Student ID is required');
-        } else if (error?.response?.status === 401) {
-          setErrorMsg('No student matches your ID');
-        } else {
-          setErrorMsg('Server error');
-        }
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const returnBook = async (id: string) => {
-    try {
-      await axiosToken.patch(`/${id}`);
-      if (singleStud) {
-        setSingleStud({
-          ...singleStud,
-          studentBookId: null,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const updateStudent = async ({ id, name, email }: UpdateStudentType) => {
     try {
-      const result = await axiosToken.patch(`/update/${id}`, {
-        name: name,
-        email: email,
+      const result = await axiosToken.patch(`/${id}`, {
+        name,
+        email,
       });
-      setSingleStud({ ...result.data, studentBook: singleStud?.studentBook });
+      setSingleStud({ ...result.data });
       setIsUpdate(false);
     } catch (error) {
       console.log(error);
@@ -135,8 +94,6 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
         deleteStudent,
         getSingleStudent,
         singleStud,
-        studentIssueBook,
-        returnBook,
         updateStudent,
         isUpdate,
         setIsUpdate,

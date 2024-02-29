@@ -3,13 +3,16 @@ import { useLocation } from 'react-router-dom';
 import { useStudentContext } from '../../../../context/students/context';
 import { FormWrapper } from '../../FormWrapper';
 import { InputField } from '../../../Basic/InputField';
+import { useBookContext } from '../../../../context/books/context';
 
 const IssueBookForm = () => {
   const {
     state: { title, bookId },
   } = useLocation();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { studentIssueBook, setErrorMsg, errorMsg } = useStudentContext();
+  const { setErrorMsg, errorMsg } = useStudentContext();
+
+  const { issueBook } = useBookContext();
 
   const [studentId, setStudentId] = useState('');
 
@@ -19,7 +22,7 @@ const IssueBookForm = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    studentIssueBook({ studentId, bookId });
+    issueBook(studentId, bookId);
     setStudentId('');
   };
 

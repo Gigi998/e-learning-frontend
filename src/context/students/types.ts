@@ -1,9 +1,4 @@
-import {
-  StudentType,
-  AddStudent,
-  IssueBookType,
-  UpdateStudentType,
-} from '../../types/studentTypes';
+import { StudentType, AddStudent, UpdateStudentType } from '../../types/studentTypes';
 import { CustomAbortController } from '../types';
 
 export type StudentContext = {
@@ -18,8 +13,6 @@ export type StudentContext = {
   setSuccessMsg: React.Dispatch<React.SetStateAction<string>>;
   deleteStudent: (id: string) => void;
   getSingleStudent: (id: string) => void;
-  studentIssueBook: ({ studentId, bookId }: IssueBookType) => void;
-  returnBook: (id: string) => void;
   updateStudent: ({ id, name, email }: UpdateStudentType) => void;
   setIsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 };
