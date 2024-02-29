@@ -64,6 +64,29 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const issueBook = async (studentId: string, bookId: string) => {
+    try {
+      await axiosBook.patch('/student/rent', {
+        studentId,
+        bookId,
+      });
+      navigate('/students');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const returnBook = async (studentId?: string, bookId?: string) => {
+    try {
+      await axiosBook.patch(`/student/return`, {
+        studentId,
+        bookId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -72,6 +95,8 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
         deleteBook,
         addNewBook,
         fetchAllBooks,
+        returnBook,
+        issueBook,
       }}
     >
       {children}

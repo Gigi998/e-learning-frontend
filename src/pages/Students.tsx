@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useStudentContext } from '../context/students/context';
 import { StudentItem } from '../components/App/Students/StudentItem';
 
 const Students = () => {
   const { getAllStudents, students } = useStudentContext();
-  const location = useLocation();
-  const loc = location.pathname;
+  const { pathname } = useLocation();
 
-  // TODO => fix book state when we refresh the page
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -21,7 +19,7 @@ const Students = () => {
 
   return (
     <>
-      {loc === '/students' ? (
+      {pathname === '/students' ? (
         <section className="main-page">
           <h2 className="text-4xl">Students</h2>
           <div className="flex items-center flex-col w-full">
