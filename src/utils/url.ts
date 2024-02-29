@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const STUD_URL = 'http://localhost:3000/api/students';
-const BOOK_URL = 'http://localhost:3000/api/books';
-const BASE_URL = 'http://localhost:3000';
+const STUD_URL = 'http://localhost:4000/api/students';
+const BOOK_URL = 'http://localhost:4000/api/books';
+const BASE_URL = 'http://localhost:4000';
 
 export default axios.create({
   baseURL: BASE_URL,

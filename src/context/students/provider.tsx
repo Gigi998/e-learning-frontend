@@ -1,7 +1,7 @@
 import { useState, ReactNode } from 'react';
 import useAddAccToken from '../../hooks/useAddAccToken';
 import axios from 'axios';
-import { axiosStud } from '../../utils/url';
+import { axiosStud, axiosBook } from '../../utils/url';
 import { useNavigate } from 'react-router-dom';
 import {
   StudentType,
@@ -21,24 +21,12 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const [singleStud, setSingleStud] = useState<StudentType | undefined>(undefined);
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const getAllStudents = async (
-    isMounted: boolean,
-    controller: CustomAbortController,
-    skip: number = 0,
-    take: number = 4
-  ) => {
+  const getAllStudents = async (isMounted: boolean, controller: CustomAbortController) => {
     try {
       const response = await axiosToken.get('', {
         signal: controller.signal,
-        params: {
-          skip,
-          take,
-        },
       });
-      isMounted &&
-        setStudents((prev) => {
-          return [...prev, ...response.data];
-        });
+      isMounted && setStudents(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if ((error.name = 'CanceledError')) {
@@ -88,7 +76,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
 
   const studentIssueBook = async ({ studentId, bookId }: IssueBookType) => {
     try {
-      await axiosToken.patch('', {
+      await axiosBook.patch('/student/rent', {
         studentId,
         bookId,
       });

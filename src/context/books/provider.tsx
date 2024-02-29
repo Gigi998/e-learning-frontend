@@ -15,22 +15,16 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
   const fetchAllBooks = async (
     isMounted: boolean,
     controller: CustomAbortController,
-    take: string,
-    isAvailable?: string
+    isTaken?: boolean
   ) => {
     try {
       const result = await axiosToken.get('', {
         signal: controller.signal,
         params: {
-          skip: books.length,
-          take: take,
-          isAvailable,
+          isTaken,
         },
       });
-      isMounted &&
-        setBooks((prev) => {
-          return [...prev, ...result.data];
-        });
+      isMounted && setBooks(result.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if ((error.name = 'CanceledError')) {

@@ -10,6 +10,3 @@ export enum Roles {
   TEACHER = 'TEACHER',
   STUDENT = 'STUDENT',
 }
-
-export const DEFAULT_STUDENTS_TAKE = 4;
-export const DEFAULT_BOOKS_TAKE = '6';
